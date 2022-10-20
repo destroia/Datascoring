@@ -52,7 +52,7 @@ namespace Api.Controllers
 
                 return result ? Ok(result) : BadRequest(result);
             }
-            return BadRequest( new { mjs = "ya existe el usuario " });
+            return BadRequest( new {value = true, mjs = "ya existe el usuario " });
         }
 
         [HttpPost]
@@ -66,7 +66,7 @@ namespace Api.Controllers
 
             var result = await Repo.Login(login);
 
-            return result != null ? Ok(result) : BadRequest(result);
+            return result != null ? Ok(new { value = true, obj=result }) : Ok(new { value = false });
         }
 
         // PUT api/<UsersController>/

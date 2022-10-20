@@ -65,7 +65,7 @@ namespace Data.Data
 
         public async Task<bool> Exist(string Email)
         {
-            var result = await DB.Users.FindAsync(Email);
+            var result = await DB.Users.Where( x => x.Email == Email).FirstOrDefaultAsync();
 
             return result == null ? false : true;
         }
@@ -80,6 +80,8 @@ namespace Data.Data
             user.Email = user.Email.Trim().ToLower();
             user.Password = user.Password.Trim().ToLower();
 
+            user.Password = Encrypt.GetSHA256(user.Password);
+
             return await DB.Users.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefaultAsync();
         }
 
@@ -89,11 +91,11 @@ namespace Data.Data
 
             if (result != null)
             {
-                user.Name = user.Name.Trim();
-                user.LastName = user.LastName.Trim();
-                user.Email = user.Email.ToLower().Trim();
+                result.Name = user.Name.Trim();
+                result.LastName = user.LastName.Trim();
+                result.Email = user.Email.ToLower().Trim();
 
-                DB.Users.Update(user);
+                DB.Users.Update(result);
                 await DB.SaveChangesAsync();
 
                 return true;

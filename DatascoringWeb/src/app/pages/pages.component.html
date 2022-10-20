@@ -1,0 +1,46 @@
+
+
+<div class="">
+  <form [formGroup]="formulario"  style="margin:50px;">
+    <div class="row">
+      <div class="col-12  " align="center">
+        <div class="col-11  col-sm-4">
+          <div class="form-group requierd">
+            <label class="control-label">Email </label>
+            <input type="email" class="form-control" formControlName="email">
+            <p *ngIf="formulario.controls['email'].invalid && formulario.controls['email'].dirty" class="text-danger"> El Email  es requerido   </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12  " align="center">
+        <div class="col-11 col-sm-4 required">
+          <div class="form-group " align="center">
+            <label class="control-label required">Contraseña  </label>
+            <input type="password" class="form-control" formControlName="password">
+            <p *ngIf="formulario.controls['password'].invalid && formulario.controls['password'].dirty" class="text-danger"> La contraseña  es requerido  y requiere una longitud mínima de 8 caracteres
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12  " align="center">
+        <div class="col-12  col-sm-4" align="center">
+          <button class="btn btn-primary btn-large btn-block" style="width:70%; position:relative; top:25px" [disabled]="formulario.invalid" (click)="Login()">Login</button>
+
+
+        </div>
+      </div>
+
+    </div>
+    <br /><br>
+
+    <div align="center">
+      <h2>{{strLogin}}</h2>
+    </div>
+  </form>
+  <div class="col-12  " align="center">
+    <div class="col-11 col-sm-4 ">
+      <button class="btn btn-primary btn-large btn-block" style="width:70%; position:relative; top:25px" (click)="CreateNewUser()">Crear Nuevo Usuario</button>
+    </div>
+  </div>
+</div>

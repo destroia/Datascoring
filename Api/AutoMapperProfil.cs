@@ -13,8 +13,8 @@ namespace Api
         public AutoMapperProfil()
         {
             CreateMap<User, UserDto>();
-            CreateMap<ChangedPassword, ChangedPasswordDto>();
-            CreateMap<Login, LoginDto>();
+            CreateMap<ChangedPasswordDto, ChangedPassword>();
+            CreateMap<LoginDto, Login>();
 
             CreateMap<UserDto, User>();
         }

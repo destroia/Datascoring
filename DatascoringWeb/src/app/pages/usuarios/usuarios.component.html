@@ -1,0 +1,112 @@
+
+<button (click)="Back()" class="btn btn-primary"> Atras </button>&nbsp;&nbsp;&nbsp;
+<div aling="center">
+  <h1>
+    {{strState}}
+  </h1>
+</div>
+
+
+<div aling="center">
+  <h2>
+    {{strUserData}}
+  </h2>
+</div>
+
+
+<form [formGroup]="formulario" style="margin:50px;">
+  <div class="row">
+    <br />
+
+
+    <div *ngIf="userIsChangedPassword === false" class="col-11  col-sm-4">
+      <div class="form-group requierd">
+        <label class="control-label">Nombre </label>
+        <input type="email" class="form-control" formControlName="name">
+        <p *ngIf="formulario.controls['name'].invalid && formulario.controls['name'].dirty" class="text-danger"> el nombre es requerido   </p>
+      </div>
+    </div>
+
+    <div *ngIf="userIsChangedPassword === false" class="col-11  col-sm-4">
+      <div class="form-group requierd">
+        <label class="control-label">Apellido </label>
+        <input type="email" class="form-control" formControlName="lastName">
+        <p *ngIf="formulario.controls['lastName'].invalid && formulario.controls['lastName'].dirty" class="text-danger"> el apellido es requerido   </p>
+      </div>
+    </div>
+
+
+    <div *ngIf="userIsChangedPassword === false" class="col-11  col-sm-4">
+      <div class="form-group requierd">
+        <label class="control-label">Email </label>
+        <input type="email" class="form-control" formControlName="email">
+        <p *ngIf="formulario.controls['email'].invalid && formulario.controls['email'].dirty" class="text-danger"> El Email  es requerido   </p>
+      </div>
+    </div>
+
+    <div *ngIf="userIsUpdate === false" class="col-11 col-sm-3 required">
+      <div class="form-group " align="center">
+        <label class="control-label required">Contraseña  </label>
+        <input type="password" class="form-control" formControlName="password" (keyup)="CheckPasswords()">
+        <p *ngIf="formulario.controls['password'].invalid && formulario.controls['password'].dirty" class="text-danger"> La contraseña  es requerido  y requiere una longitud mínima de 8 caracteres</p>
+      </div>
+    </div>
+
+    <div *ngIf="userIsUpdate === false" class="col-11 col-sm-3 required">
+      <div class="form-group " align="center">
+        <label class="control-label required">Confirmacion de Contraseña  </label>
+        <input type="password" class="form-control" formControlName="confirmPassword" (keyup)="CheckPasswords()">
+        <p *ngIf="((formulario.controls['confirmPassword'].invalid && formulario.controls['confirmPassword'].dirty) || checkPasswords == false) " class="text-danger"> La  confirmacion de contraseña  es requerido y debe ser igual a la contraceña y requiere una longitud mínima de 8 caracteres</p>
+      </div>
+    </div>
+
+    <div class="text-danger " aling="center">
+      <h2>
+        {{strCreate}}
+      </h2>
+    </div>
+
+    <div class="col-12  " align="center">
+      <div class="col-12  col-sm-4" align="center">
+        <button class="btn btn-primary btn-large btn-block" style="width:70%; position:relative; top:25px" [disabled]="formulario.invalid" (click)="Save()">Guardar</button>
+      </div>
+    </div>
+  </div>
+  <br /><br>
+</form>
+<div align="center">
+  <h2>Usuarios</h2>
+  <br /><br />
+  <div class="table-responsive ">
+    <table class="table  table-striped">
+      <thead>
+        <tr class="table-striped ">
+          <th scope="col">Nombre Usuario</th>
+          <th scope="col">Nombre Apellido</th>
+          <th scope="col">Nombre Email</th>
+          <th scope="col">Nombre Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let li of users" class="table-striped ">
+          <td>
+            {{
+li.name
+            }}
+          </td>
+          <td> {{li.lastName }}</td>
+          <td> {{li.email }}</td>
+          <td> {{li.password }}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <button (click)="ChangedPassword(li)" class="btn btn-primary"> Cambiar Contraseña </button>&nbsp;&nbsp;&nbsp;
+              <button (click)="Update(li)" class="btn btn-warning"> Actualizar </button>&nbsp;&nbsp;&nbsp;
+              <button (click)="Delete(li)" class="btn btn-danger">Eliminar </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
